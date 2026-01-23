@@ -32,7 +32,7 @@ const RECORDS: RecordItem[] = [
   { label: "Other", value: 70 },
 ];
 
-export default function Type12() {
+export default function Type16() {
   const total = useMemo(() => RECORDS.reduce((s, r) => s + r.value, 0), []);
 
   const enriched: EnrichedItem[] = useMemo(
@@ -82,39 +82,48 @@ export default function Type12() {
       `}</style>
 
       {/* vertical scroll container */}
-      <div className="flex-1 w-full overflow-y-auto" style={{ maxHeight: 400 }}>
+      <div className="flex-1 w-full" style={{ maxHeight: 400 }}>
         <Plot
-        data={[
-  // independent horizontal lines
-  {
-    type: "scatter",
-    mode: "lines",
-    x: values.flatMap((v) => [0, v, null]),
-    y: labels.flatMap((l) => [l, l, null]),
-    customdata: percents.flatMap((p) => [p, p, null]),
-    hovertemplate:
-      "%{y}: %{x} (%{customdata:.1f}%)<extra></extra>",
-    line: {
-      width: 2,
-      color: "#636efa",
-    },
+       data={[
+  // one horizontal line per record (each gets its own color)
+  ...enriched.map((e, i) => ({
+  type: "scatter" as const,
+  mode: "lines+markers" as const,
+  x: [0, e.value],
+  y: [e.label, e.label],
+  customdata: [e.percent],
+  hovertemplate:
+    "%{y}: %{x} (%{customdata:.1f}%)<extra></extra>",
+  line: {
+    width: 2,
+    color: colors[i],
   },
+  marker: {
+    size: 3,
+    color: colors[i],
+  },
+  showlegend: false,
+}))
+,
 
   // labels at end of line
-  {
-    type: "scatter",
-    mode: "text",
-  x: values.map((v) => v + 2), //space labels 2 units right of line end
-    y: labels,
-    text: labels,
-    textposition: "middle right",
-    textfont: {
-      size: 7,
-      color: "black",
-    },
-    hoverinfo: "skip",
+ {
+  type: "scatter" as const,
+  mode: "text" as const,
+  x: values.map((v) => v + 2),
+  y: labels,
+  text: labels,
+  textposition: "middle right" as const,
+  textfont: {
+    size: 7,
+    color: "black",
   },
+  hoverinfo: "skip" as const,
+  showlegend: false,
+}
+
 ]}
+
 
 
 

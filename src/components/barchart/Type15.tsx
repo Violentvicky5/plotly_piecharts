@@ -38,7 +38,7 @@ export default function Type12() {
  const enriched: EnrichedItem[] = useMemo(
   () =>
     [...RECORDS]
-      .sort((a, b) => a.value - b.value) // high → low
+      .sort((a, b) => a.value - b.value) 
       .map((r) => ({
         ...r,
         percent: total ? (r.value / total) * 100 : 0,

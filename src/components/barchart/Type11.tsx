@@ -80,8 +80,15 @@ export default function Type11() {
 
   return (
     <div className="w-full h-full flex flex-col">
+       <style jsx global>{`
+        .js-plotly-plot .modebar {
+        display: flex !important;
+          transform: scale(0.5);
+          transform-origin:  right;
+        }
+      `}</style>
       {/* Bar chart */}
-      <div className="w-full h-[165px] overflow-x-auto">
+<div className="w-full h-[165px] overflow-x-auto overflow-y-visible">
         <Plot
           data={[
             {
@@ -103,7 +110,7 @@ export default function Type11() {
           layout={{
             height: 145,
             autosize: false,
-            margin: { t: 10, b: 10, l: 20, r: 10 },
+            margin: { t: 20, b: 10, l: 20, r: 10 },
             paper_bgcolor: "lightgray",
             plot_bgcolor: "lightgray",
             xaxis: {
@@ -118,7 +125,7 @@ export default function Type11() {
           }}
           config={{
             responsive: true,
-            displayModeBar: false,
+            displayModeBar: true,
             displaylogo: false,
           }}
           style={{

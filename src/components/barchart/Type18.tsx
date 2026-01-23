@@ -14,7 +14,7 @@ const RECORDS: RecordItem[] = [
   { label: "Firefox", value: 90 },
   { label: "Edge", value: 79 },
   { label: "Safari", value: 60 },
-  { label: "Brave", value: 150 },
+  { label: "Braveh", value: 150 },
   { label: "Opera", value: 110 },
   { label: "Vivaldi", value: 95 },
   { label: "Samsung", value: 80 },
@@ -32,7 +32,7 @@ const RECORDS: RecordItem[] = [
   { label: "Other", value: 70 },
 ];
 
-export default function Type12() {
+export default function Type18() {
   const total = useMemo(() => RECORDS.reduce((s, r) => s + r.value, 0), []);
 
   const enriched: EnrichedItem[] = useMemo(
@@ -48,6 +48,30 @@ export default function Type12() {
   const values = enriched.map((e) => e.value);
   const percents = enriched.map((e) => e.percent);
 
+  //colors
+  const colors = [
+    "#636efa",
+    "#EF553B",
+    "#00cc96",
+    "#ab63fa",
+    "#FFA15A",
+    "#19d3f3",
+    "#FF6692",
+    "#B6E880",
+    "#FF97FF",
+    "#FECB52",
+    "#1f77b4",
+    "#ff7f0e",
+    "#2ca02c",
+    "#d62728",
+    "#9467bd",
+    "#8c564b",
+    "#e377c2",
+    "#7f7f7f",
+    "#bcbd22",
+    "#17becf",
+  ];
+
   return (
     <>
       <style jsx global>{`
@@ -60,19 +84,22 @@ export default function Type12() {
 
       <div className="flex-1 w-full" style={{ maxHeight: 400 }}>
         <Plot
-          data={[
-            // independent vertical lines
-            {
-              type: "scatter",
-  mode: "lines+markers",
-                y: values.flatMap((v) => [0, v, null]),
-              x: labels.flatMap((l) => [l, l, null]),
-              customdata: percents.flatMap((p) => [p, p, null]),
-              hovertemplate: "%{x}: %{y} (%{customdata:.1f}%)<extra></extra>",
-              line: { width: 2, color: "#636efa" },
-               marker: { size: 3, color: "#ff0000" }, 
+          data={labels.map((label, i) => ({
+            type: "scatter",
+            mode: "lines+markers",
+            x: [label, label],
+            y: [0, values[i]],
+            customdata: [percents[i], percents[i]],
+            hovertemplate: "%{x}: %{y} (%{customdata:.1f}%)<extra></extra>",
+            line: {
+              width: 2,
+              color: colors[i],
             },
-          ]}
+            marker: {
+              size: 3,
+              color: colors[i],
+            },
+          }))}
           layout={
             {
               autosize: true,
@@ -85,7 +112,12 @@ export default function Type12() {
                 showgrid: false,
                 showticklabels: false,
               },
-              yaxis: { zeroline: false, showgrid: true, showticklabels: true, tickfont: { size: 7, color: "black" }, },
+              yaxis: {
+                zeroline: false,
+                showgrid: true,
+                showticklabels: true,
+                tickfont: { size: 7, color: "black" },
+              },
 
               annotations: labels.map((l, i) => ({
                 x: l,
@@ -96,7 +128,7 @@ export default function Type12() {
                 font: { size: 8, color: "black" },
                 xanchor: "center",
                 yanchor: "bottom",
-              })) as any, 
+              })) as any,
             } as Partial<Layout>
           }
           config={{
