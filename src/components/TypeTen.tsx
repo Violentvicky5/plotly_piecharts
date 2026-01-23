@@ -11,8 +11,8 @@ type Item = {
   percent: number;
 };
 
-export default function SimplifiedPieChart() {
-      const [chartReady, setChartReady] = useState(false);
+export default function TypeTen() {
+  const [chartReady, setChartReady] = useState(false);
 
   const values: number[] = [
     120, 90, 79, 60, 150, 110, 95, 80, 70, 65, 140, 100, 85, 55, 55, 130, 105,
@@ -101,7 +101,7 @@ export default function SimplifiedPieChart() {
       "#17becf", // cyan
     ];
 
-    return enriched.map((_, i) => base[i % base.length]);   // to get enriched[i] for color
+    return enriched.map((_, i) => base[i % base.length]); // to get enriched[i] for color
   }, [enriched]);
 
   return (
@@ -117,7 +117,7 @@ export default function SimplifiedPieChart() {
               text: visibleData.map((d) => `${d.percent.toFixed(1)}%`),
               textinfo: "text",
               textfont: { size: 6, color: "black" },
-                insidetextorientation: "radial",
+              insidetextorientation: "radial",
               pull: 0.03,
               hovertemplate: "%{label}: %{text}<extra></extra>",
               marker: {
@@ -126,8 +126,9 @@ export default function SimplifiedPieChart() {
             },
           ]}
           layout={{
+            height: 165,
             showlegend: false,
-            margin: { t: 10, b: 10, l: 10, r: 10 },
+            margin: { t: 0, b: 0, l: 0, r: 0 },
             autosize: true,
             paper_bgcolor: "lightgray",
           }}
@@ -137,39 +138,42 @@ export default function SimplifiedPieChart() {
             displaylogo: false,
           }}
           style={{ width: "100%", height: "100%" }}
-          onInitialized={()=>setChartReady(true)}
-        //onAfterPlot={()=>setChartReady(true)}
+          onInitialized={() => setChartReady(true)}
+          //onAfterPlot={()=>setChartReady(true)}
         />
       </div>
 
-      {/*customm :) card legend  */}
-     {chartReady && (
-   <div className="flex justify-center items-center">
-     <div className="mt-2 grid grid-cols-2 gap-3 overflow-y-auto max-h-[100px]">
-        {enriched.map((item, index) => {
-          const active = visible.has(item.label);
+      {/*customm card legend  */}
 
-          return (
-            <button
-              key={item.label}
-              onClick={() => toggle(item.label)}
-              className={`flex items-center gap-0.5 text-[8px]
+      <div
+        className={`flex justify-center items-center transition-opacity ${
+          chartReady ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <div className="mt-2 grid grid-cols-2 gap-3 overflow-y-auto max-h-[80px]">
+          {enriched.map((item, index) => {
+            const active = visible.has(item.label);
+
+            return (
+              <button
+                key={item.label}
+                onClick={() => toggle(item.label)}
+                className={`flex items-center gap-0.5 text-[8px]
                 ${active ? "bg-white-100" : "opacity-40"}
               `}
-            >
-              <span
-                className="w-3 h-3 rounded-sm shrink-0"
-                style={{ backgroundColor: colors[index] }}
-              />
-              <span className="truncate">
-                {item.label} — {item.percent.toFixed(1)}%
-              </span>
-            </button>
-          );
-        })}
+              >
+                <span
+                  className="w-3 h-3 rounded-sm shrink-0"
+                  style={{ backgroundColor: colors[index] }}
+                />
+                <span className="truncate">
+                  {item.label} — {item.percent.toFixed(1)}%
+                </span>
+              </button>
+            );
+          })}
         </div>
-   </div>
-    )}
-     </div>
+      </div>
+    </div>
   );
 }

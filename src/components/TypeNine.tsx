@@ -48,7 +48,7 @@ export default function TypeSeven() {
   ];
 
   const layout: Partial<Layout> = {
-    margin: { t: 10, l: 10, r: 10, b: 10 },
+    margin: { t: 3, l: 10, r: 10, b: 10 },
     height: undefined,
     legend: {
       orientation: "h",
