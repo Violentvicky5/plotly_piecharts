@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
 
@@ -14,20 +14,27 @@ type EnrichedItem = RecordItem & {
   percent: number;
 };
 
-const RECORDS: RecordItem[] = Array.from({ length: 500 }, (_, i) => ({
-  label: `Item ${i + 1}`,
-  value: Math.floor(Math.random() * 150) + 20,
-}));
+
 
 export default function Type11() {
   const [chartReady, setChartReady] = useState(false);
+const [records, setRecords] = useState<RecordItem[]>([]);
 
- const total = useMemo(() => RECORDS.reduce((s, r) => s + r.value, 0), [RECORDS]);
+useEffect(() => {
+  setRecords(
+    Array.from({ length: 500 }, (_, i) => ({
+      label: `Item ${i + 1}`,
+      value: Math.floor(Math.random() * 150) + 20,
+    }))
+  );
+}, []);
+
+ const total = useMemo(() => records.reduce((s, r) => s + r.value, 0), [records]);
 const enriched = useMemo(() => 
-  RECORDS.map(r => ({
+  records.map(r => ({
     ...r,
     percent: total ? (r.value / total) * 100 : 0,
-  })), [RECORDS, total]);
+  })), [records, total]);
 
 
   const labels = useMemo(() => enriched.map((e) => e.label), [enriched]);
@@ -140,7 +147,7 @@ const enriched = useMemo(() =>
                 className="w-3 h-3 rounded-sm shrink-0"
                 style={{ backgroundColor: colors[index] }}
               />
-              <span className="">
+              <span  suppressHydrationWarning>
                 {item.label} — {item.percent.toFixed(1)}%
               </span>
             </div>
