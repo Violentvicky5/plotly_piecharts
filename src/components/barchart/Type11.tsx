@@ -14,44 +14,25 @@ type EnrichedItem = RecordItem & {
   percent: number;
 };
 
-const RECORDS: RecordItem[] = [
-  { label: "Chrome", value: 120 },
-  { label: "Firefox", value: 90 },
-  { label: "Edge", value: 79 },
-  { label: "Safari", value: 60 },
-  { label: "Brave", value: 150 },
-  { label: "Opera", value: 110 },
-  { label: "Vivaldi", value: 95 },
-  { label: "Samsung", value: 80 },
-  { label: "UC", value: 70 },
-  { label: "Tor", value: 65 },
-  { label: "IE", value: 140 },
-  { label: "DuckDuckGo", value: 100 },
-  { label: "Yandex", value: 85 },
-  { label: "Maxthon", value: 55 },
-  { label: "Pale Moon", value: 55 },
-  { label: "QQ", value: 130 },
-  { label: "Sogou", value: 105 },
-  { label: "Baidu", value: 98 },
-  { label: "Whale", value: 88 },
-  { label: "Other", value: 70 },
-];
+const RECORDS: RecordItem[] = Array.from({ length: 500 }, (_, i) => ({
+  label: `Item ${i + 1}`,
+  value: Math.floor(Math.random() * 150) + 20,
+}));
 
 export default function Type11() {
   const [chartReady, setChartReady] = useState(false);
 
-  const total = useMemo(() => RECORDS.reduce((sum, r) => sum + r.value, 0), []);
+ const total = useMemo(() => RECORDS.reduce((s, r) => s + r.value, 0), [RECORDS]);
+const enriched = useMemo(() => 
+  RECORDS.map(r => ({
+    ...r,
+    percent: total ? (r.value / total) * 100 : 0,
+  })), [RECORDS, total]);
 
-  const enriched: EnrichedItem[] = useMemo(() => {
-    return RECORDS.map((r) => ({
-      ...r,
-      percent: total ? (r.value / total) * 100 : 0,
-    }));
-  }, [total]);
 
   const labels = useMemo(() => enriched.map((e) => e.label), [enriched]);
   const values = useMemo(() => enriched.map((e) => e.value), [enriched]);
-
+  const percents = enriched.map((e) => e.percent);
   const colors = useMemo(
     () => [
       "#636efa",
@@ -78,6 +59,8 @@ export default function Type11() {
     [],
   );
 
+  const barColors = labels.map((_, i) => colors[i % colors.length]);  
+
   return (
     <div className="w-full h-full flex flex-col">
        <style jsx global>{`
@@ -95,21 +78,25 @@ export default function Type11() {
               type: "bar",
               x: labels,
               y: values,
-              marker: { color: colors },
-              text: labels,
-              textposition: "inside",
-              textangle: -90,
+              width: labels.map(() => 0.4),
+
+              marker: { color: barColors },
+           //   text: labels,
+           //     textposition: "inside",
+           //   textangle: -90,
               textfont: {
                 size: 7,
                 color: "black",
               },
 
-              hovertemplate: "%{x}: %{y}<extra></extra>",
-            },
+ customdata: percents,
+              hovertemplate: "%{x}: %{y} (%{customdata:.1f}%)<extra></extra>",
+                     },
           ]}
           layout={{
             height: 145,
-            autosize: false,
+            autosize: true,
+              bargap: 0.015,   
             margin: { t: 20, b: 10, l: 20, r: 10 },
             paper_bgcolor: "lightgray",
             plot_bgcolor: "lightgray",
@@ -129,7 +116,7 @@ export default function Type11() {
             displaylogo: false,
           }}
           style={{
-            width: labels.length * 30,
+            width: labels.length * 10,
             minWidth: "100%",
             height: "100%",
           }}
@@ -153,7 +140,7 @@ export default function Type11() {
                 className="w-3 h-3 rounded-sm shrink-0"
                 style={{ backgroundColor: colors[index] }}
               />
-              <span className="truncate">
+              <span className="">
                 {item.label} — {item.percent.toFixed(1)}%
               </span>
             </div>

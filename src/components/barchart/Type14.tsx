@@ -9,30 +9,12 @@ const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
 type RecordItem = { label: string; value: number };
 type EnrichedItem = RecordItem & { percent: number };
 
-const RECORDS: RecordItem[] = [
-  { label: "Chrome", value: 120 },
-  { label: "Firefox", value: 90 },
-  { label: "Edge", value: 79 },
-  { label: "Safari", value: 60 },
-  { label: "Brave", value: 150 },
-  { label: "Opera", value: 110 },
-  { label: "Vivaldi", value: 95 },
-  { label: "Samsung", value: 80 },
-  { label: "UC", value: 70 },
-  { label: "Tor", value: 65 },
-  { label: "IE", value: 140 },
-  { label: "DuckDuckGo", value: 100 },
-  { label: "Yandex", value: 85 },
-  { label: "Maxthon", value: 55 },
-  { label: "Pale Moon", value: 55 },
-  { label: "QQ", value: 130 },
-  { label: "Sogou", value: 105 },
-  { label: "Baidu", value: 98 },
-  { label: "Whale", value: 88 },
-  { label: "Other", value: 70 },
-];
+const RECORDS: RecordItem[] =Array.from({ length: 100 }, (_, i) => ({
+  label: `Item ${i + 1}`,
+  value: Math.floor(Math.random() * 150) + 20,
+}));
 
-export default function Type12() {
+export default function Type14() {
   const total = useMemo(() => RECORDS.reduce((s, r) => s + r.value, 0), []);
 
   const enriched: EnrichedItem[] = useMemo(
@@ -70,6 +52,8 @@ export default function Type12() {
     "#bcbd22",
     "#17becf",
   ];
+  const barColors = labels.map((_, i) => colors[i % colors.length]);
+
 
   return (
     <>
@@ -90,7 +74,7 @@ export default function Type12() {
               orientation: "h",
              y: labels,
               x: values,
-              marker: { color: colors },
+              marker: { color: barColors },
               text: labels,
               textposition: "inside",
               textangle: 0,

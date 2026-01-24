@@ -40,6 +40,8 @@ export default function TypeTen() {
     "Baidu",
     "Whale",
     "Other",
+    
+    
   ];
 
   const data = useMemo(

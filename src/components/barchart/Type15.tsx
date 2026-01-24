@@ -9,43 +9,24 @@ const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
 type RecordItem = { label: string; value: number };
 type EnrichedItem = RecordItem & { percent: number };
 
-const RECORDS: RecordItem[] = [
-  { label: "Chrome", value: 120 },
-  { label: "Firefox", value: 90 },
-  { label: "Edge", value: 79 },
-  { label: "Safari", value: 60 },
-  { label: "Brave", value: 150 },
-  { label: "Opera", value: 110 },
-  { label: "Vivaldi", value: 95 },
-  { label: "Samsung", value: 80 },
-  { label: "UC", value: 70 },
-  { label: "Tor", value: 65 },
-  { label: "IE", value: 140 },
-  { label: "DuckDuckGo", value: 100 },
-  { label: "Yandex", value: 85 },
-  { label: "Maxthon", value: 55 },
-  { label: "Pale Moon", value: 55 },
-  { label: "QQ", value: 130 },
-  { label: "Sogou", value: 105 },
-  { label: "Baidu", value: 98 },
-  { label: "Whale", value: 88 },
-  { label: "Other", value: 70 },
-];
+const RECORDS: RecordItem[] = Array.from({ length: 50 }, (_, i) => ({
+  label: `Item ${i + 1}`,
+  value: Math.floor(Math.random() * 150) + 20,
+}));
 
-export default function Type12() {
+export default function Type15() {
   const total = useMemo(() => RECORDS.reduce((s, r) => s + r.value, 0), []);
 
- const enriched: EnrichedItem[] = useMemo(
-  () =>
-    [...RECORDS]
-      .sort((a, b) => a.value - b.value) 
-      .map((r) => ({
-        ...r,
-        percent: total ? (r.value / total) * 100 : 0,
-      })),
-  [total],
-);
-
+  const enriched: EnrichedItem[] = useMemo(
+    () =>
+      [...RECORDS]
+        .sort((a, b) => a.value - b.value)
+        .map((r) => ({
+          ...r,
+          percent: total ? (r.value / total) * 100 : 0,
+        })),
+    [total],
+  );
 
   const labels = enriched.map((e) => e.label);
   const values = enriched.map((e) => e.value);
@@ -74,6 +55,9 @@ export default function Type12() {
     "#17becf",
   ];
 
+ 
+  const barColors = labels.map((_, i) => colors[i % colors.length]);
+
   return (
     <>
       <style jsx global>{`
@@ -91,9 +75,9 @@ export default function Type12() {
             {
               type: "bar",
               orientation: "h",
-             y: labels,
+              y: labels,
               x: values,
-              marker: { color: colors },
+              marker: { color: barColors }, // ✅ use cycled colors
               text: labels,
               textposition: "inside",
               textangle: 0,
@@ -114,7 +98,6 @@ export default function Type12() {
                 showgrid: true,
                 side: "bottom",
               },
-
               yaxis: {
                 showticklabels: false,
                 ticks: "",
@@ -122,7 +105,7 @@ export default function Type12() {
                 zeroline: false,
                 showline: false,
               },
-            } 
+            } as Partial<Layout>
           }
           config={{
             responsive: true,
