@@ -82,10 +82,10 @@ export default function Type20() {
             showlegend: false,
             xaxis: {
               tickvals: xNumeric,
-              ticktext: labels,
-              tickangle: -90,
-              tickfont: { size: 8 },
-              showgrid: false,
+//              ticktext: labels,
+          //    tickangle: -90,
+          //    tickfont: { size: 8 },
+              showgrid: true,
               zeroline: false,
             },
             yaxis: {
