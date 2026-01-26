@@ -10,6 +10,7 @@ import Type16 from "@/components/barchart/Type16";
 import Type17 from "@/components/barchart/Type17";
 import Type18 from "@/components/barchart/Type18";
 import Type19 from "@/components/barchart/Type19";
+import Type20 from "@/components/barchart/Type20";
 const page = () => {
   return (
    <div className="bg-gray-100 min-h-screen p-3 sm:p-6 lg:p-8">
@@ -67,6 +68,10 @@ const page = () => {
      <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
       <h3>Type19</h3>
       <Type19 />
+    </div>
+      <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
+      <h3>Type20</h3>
+      <Type20 />
     </div>
   </div>
 </div>
