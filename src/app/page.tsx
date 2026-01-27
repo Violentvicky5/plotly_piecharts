@@ -1,4 +1,6 @@
 import React from "react";
+import ChartCard from "@/components/ChartCard";
+
 import TypeNine from "@/components/TypeNine";
 import TypeTen from "@/components/TypeTen";
 import Type11 from "@/components/barchart/Type11";
@@ -11,71 +13,60 @@ import Type17 from "@/components/barchart/Type17";
 import Type18 from "@/components/barchart/Type18";
 import Type19 from "@/components/barchart/Type19";
 import Type20 from "@/components/barchart/Type20";
+
 const page = () => {
   return (
-   <div className="bg-gray-100 min-h-screen p-3 sm:p-6 lg:p-8">
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-    {/* Card */}
-    <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
-      <h3>TypeNine</h3>
-      <TypeNine />
-    </div>
+    <div className="bg-gray-100 min-h-screen p-3 sm:p-6 lg:p-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <ChartCard title="TypeNine">
+          <TypeNine />
+        </ChartCard>
 
-    <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
-      <h3>TypeTen</h3>
-      <TypeTen />
-    </div>
+        <ChartCard title="TypeTen">
+          <TypeTen />
+        </ChartCard>
 
-    <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
-      <h3>Type11</h3>
-      <Type11 />
-    </div>
+        <ChartCard title="Type11">
+          <Type11 />
+        </ChartCard>
 
-    <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
-      <h3>Type12</h3>
-      <Type12 />
-    </div>
+        <ChartCard title="Type12">
+          <Type12 />
+        </ChartCard>
 
-    <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
-      <h3>Type13</h3>
-      <Type13 />
-    </div>
+        <ChartCard title="Type13">
+          <Type13 />
+        </ChartCard>
 
-    <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
-      <h3>Type14</h3>
-      <Type14 />
-    </div>
+        <ChartCard title="Type14">
+          <Type14 />
+        </ChartCard>
 
-    <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
-      <h3>Type15</h3>
-      <Type15 />
-    </div>
+        <ChartCard title="Type15">
+          <Type15 />
+        </ChartCard>
 
-    <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
-      <h3>Type16</h3>
-      <Type16 />
-    </div>
+        <ChartCard title="Type16">
+          <Type16 />
+        </ChartCard>
 
-    <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
-      <h3>Type17</h3>
-      <Type17 />
-    </div>
-    
-    <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
-      <h3>Type18</h3>
-      <Type18 />
-    </div>
-     <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
-      <h3>Type19</h3>
-      <Type19 />
-    </div>
-      <div className="bg-white rounded-xl p-3 sm:p-4 flex flex-col w-full max-w-[350px] h-[300px]">
-      <h3>Type20</h3>
-      <Type20 />
-    </div>
-  </div>
-</div>
+        <ChartCard title="Type17">
+          <Type17 />
+        </ChartCard>
 
+        <ChartCard title="Type18">
+          <Type18 />
+        </ChartCard>
+
+        <ChartCard title="Type19">
+          <Type19 />
+        </ChartCard>
+
+        <ChartCard title="Type20">
+          <Type20 />
+        </ChartCard>
+      </div>
+    </div>
   );
 };
 
