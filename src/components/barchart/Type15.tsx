@@ -89,6 +89,7 @@ export default function Type15() {
           layout={
             {
               autosize: true,
+              
               margin: { t: 20, b: 30, l: 15, r: 20 },
               paper_bgcolor: "lightgray",
               plot_bgcolor: "lightgray",

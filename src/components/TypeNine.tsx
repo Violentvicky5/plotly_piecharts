@@ -5,7 +5,7 @@ import type { Data, Layout, Config } from "plotly.js";
 
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
 
-export default function TypeSeven() {
+export default function TypeNine() {
   const values: number[] = [
     120, 90, 79, 60, 150, 110, 95, 80, 70, 65, 140, 100, 85, 55, 55, 130, 105,
     98, 88, 50,

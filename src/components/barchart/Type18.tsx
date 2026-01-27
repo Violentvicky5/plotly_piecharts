@@ -43,6 +43,7 @@ export default function TypeScalableChart() {
         }))}
         layout={{
           autosize: true,
+       
           margin: { t: 20, b: 20, l: 40, r: 40 },
           paper_bgcolor: "#f3f3f3",
           plot_bgcolor: "#f3f3f3",
