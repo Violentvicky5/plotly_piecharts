@@ -19,11 +19,11 @@ export default function Type21() {
 
       error_y: {
         type: "data",
-        array: [5, 8, 4, 6],
-        visible: true,
+        array: [5, 5, 4, 6],
+        visible:true,
       },
 
-      offset: -0.2,
+      offset: -0.12,
       cliponaxis: false,
 
       marker: {
@@ -38,11 +38,11 @@ export default function Type21() {
 
       error_y: {
         type: "data",
-        array: [3, 5, 2, 4],
+        array: [3, 5, 2, 4], //top I size 
         visible: true,
       },
 
-      offset: 0.2,
+      offset: 0.2,  // ttrace 2 shifting alignment
       cliponaxis: false,
     },
   ];

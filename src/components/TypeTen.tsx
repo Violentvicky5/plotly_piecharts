@@ -125,6 +125,7 @@ export default function TypeTen() {
               marker: {
                 colors: colors.filter((_, i) => visible.has(enriched[i].label)),
               },
+            //  hole:"0.2"
             },
           ]}
           layout={{

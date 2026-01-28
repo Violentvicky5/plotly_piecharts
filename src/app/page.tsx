@@ -13,7 +13,9 @@ import Type17 from "@/components/barchart/Type17";
 import Type18 from "@/components/barchart/Type18";
 import Type19 from "@/components/barchart/Type19";
 import Type20 from "@/components/barchart/Type20";
-import Type21 from "@/components/barchart/Type21"
+import Type21 from "@/components/barchart/Type21";
+import Type22 from "@/components/barchart/Type22";
+import Type23 from "@/components/Type23";
 
 const page = () => {
   return (
@@ -70,6 +72,23 @@ const page = () => {
            <ChartCard title="Type21">
           <Type21 />
         </ChartCard>
+
+        <ChartCard title="Type22">
+            <Type22
+        x={["A", "B", "C", "D"]}
+        y={[10, 25, 15, 30]}
+        name="Sales"
+      />
+        </ChartCard>
+
+
+<ChartCard title="type23">
+    <Type23
+        values={[40, 30, 20, 10]}
+        labels={["A", "B", "C", "D"]}
+      />
+</ChartCard>
+
       </div>
     </div>
   );
