@@ -16,6 +16,9 @@ import Type20 from "@/components/barchart/Type20";
 import Type21 from "@/components/barchart/Type21";
 import Type22 from "@/components/barchart/Type22";
 import Type23 from "@/components/Type23";
+import Type24 from "@/components/barchart/Type24";
+import Type25 from "@/components/barchart/Type25";
+import Type26 from "@/components/barchart/Type26"
 
 const page = () => {
   return (
@@ -89,6 +92,16 @@ const page = () => {
       />
 </ChartCard>
 
+<ChartCard title="type24">
+<Type24/>
+</ChartCard>
+
+<ChartCard title="type25">
+<Type25/>
+</ChartCard>
+<ChartCard title="type26">
+<Type26/>
+</ChartCard>
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ type RecordItem = {
   value: number;
 };
 
-const RECORDS: RecordItem[] = Array.from({ length: 100 }, (_, i) => ({
+const RECORDS: RecordItem[] = Array.from({ length: 20 }, (_, i) => ({
   label: `Item ${i + 1}`,
   value: Math.floor(Math.random() * 150) + 20,
 }));
